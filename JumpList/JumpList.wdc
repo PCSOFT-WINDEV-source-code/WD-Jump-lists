@@ -1,0 +1,1117 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : JumpList
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x1b29f5d5001215b2
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAAhEyRvu1SFllFqBwisp8ZfsevuLAZ3BwtJsIumiFVJSVtWmNilwnXhEvlPlkzyi5wBfNgUhlp5vc2UN6iFS8erAsrbLo7TWz2X6RGfI2VpuQgCe1IX1o0sJ3/E/wRk1AfWQhaMS9kshEpsncY=
+     code : |1-
+      
+      // GUID type
+      GUID is Structure
+      	Data1 is 4-byte int
+      	Data2 is 2-byte int
+      	Data3 is 2-byte int
+      	Data4 is array fixed of 8 1-byte unsigned int
+      END
+      
+      // PROPKEY type
+      PROPKEY is Structure
+      	GUID is GUID
+      	Type is unsigned int	
+      END
+      
+      JumpList is class
+      	
+      	
+      PRIVATE
+      	m_ICustomDestinationList		is a COMObject 									// COM ICustomDestinationList interface
+      	
+      	IID_ICustomDestinationList		is string										// Identifier of the ICustomDestinationList interface
+      	IID_IObjectArray				is string										// Identifier of the IObjectArray interface
+      	IID_IShellLink					is string										// Identifier of the IShellLink interface
+      	IID_IShellItem					is string										// Identifier of the IShellItem interface
+      	IID_IObjectCollection			is string										// Identifier of the IObjectCollection interface
+      	IID_IPropertyStore				is string										// Identifier of the IPropertyStore interface
+      	IID_IUnknown					is string										// Identifier of the IUnknown interface
+      	CLSID_IObjectCollection			is string										// Identifier of the IObjectCollection class
+      	CLSID_ICustomDestinationList	is string										// Identifier of the ICustomDestinationList class
+      	CLSID_IShellLink				is string										// Identifier of the IShellLink class
+      	CLSID_IShellItem				is string										// Identifier of the IShellItem class		
+      	
+      GLOBAL PRIVATE
+      	mg_sAppID						is string UNICODE															// Identifier of the application
+      	mg_aaCategories					is ASSOCIATIVE ARRAY (ccIgnoreAccent + ccIgnoreCase) of JumpListCategory		// List of categories
+      	mg_arrTasks					is array of JumpListTask	dynamic										// Task list
+      	mg_arrDeletedElements			is array of JumpListFile dynamic										// List of elements deleted by the user
+      	mg_RemovedElements				is a COMObject																	// COM IObjectArray interface representing the deleted objects
+      	mg_bOSValidVersion				is boolean																	// Valid Windows version
+      END
+      
+      CONSTANT
+      	
+      	NullObject										= 0
+      	
+      	// Method of the IUnknown interface (base class of the COM objects)
+      	IUnknown_QueryInterface							= 0
+      	IUnknown_AddRef									= 1
+      	IUnknown_Release								= 2
+      	
+      	// Methods of the ICustomDestinationList interface
+      	ICustomDestinationList_SetAppID					= 3
+      	ICustomDestinationList_BeginList				= 4
+      	ICustomDestinationList_AppendCategory			= 5
+      	ICustomDestinationList_AppendKnownCategory		= 6
+      	ICustomDestinationList_AddUserTasks				= 7
+      	ICustomDestinationList_CommitList				= 8
+      	ICustomDestinationList_GetRemovedDestinations	= 9
+      	ICustomDestinationList_DeleteList				= 10
+      	ICustomDestinationList_AbortList				= 11
+      	
+      	// Methods of the IObjectArray interface
+      	IObjectArray_GetCount							= 3
+      	IObjectArray_GetAt								= 4
+      	
+      	// Methods of the IObjectCollection interface
+      	IObjectCollection_AddObject						= 5
+      	IObjectCollection_AddFromArray					= 6
+      	IObjectCollection_RemoveObjectAt				= 7
+      	IObjectCollection_Clear							= 8	
+      	
+      	// Methods of the IShellLink interface
+      	IShellLink_GetPath								= 3
+      	IShellLink_GetIDList							= 4
+      	IShellLink_SetIDList							= 5
+      	IShellLink_GetDescription						= 6
+      	IShellLink_SetDescription						= 7
+      	IShellLink_GetWorkingDirectory					= 8
+      	IShellLink_SetWorkingDirectory					= 9
+      	IShellLink_GetArguments							= 10
+      	IShellLink_SetArguments							= 11
+      	IShellLink_GetHotkey							= 12
+      	IShellLink_SetHotkey							= 13
+      	IShellLink_GetShowCmd							= 14
+      	IShellLink_SetShowCmd							= 15
+      	IShellLink_GetIconLocation						= 16
+      	IShellLink_SetIconLocation						= 17
+      	IShellLink_SetRelativePath						= 18
+      	IShellLink_Resolve								= 19
+      	IShellLink_SetPath								= 20
+      	
+      	// Methods of the IShellItem interface
+      	IShellItem_BindToHandler						= 3
+      	IShellItem_GetParent							= 4
+      	IShellItem_GetDisplayName						= 5
+      	IShellItem_GetAttributes						= 6
+      	IShellItem_Compare								= 7
+      	
+      	// Methods of the IPropertyStore interface
+      	IPropertyStore_GetCount							= 3
+      	IPropertyStore_GetAt							= 4
+      	IPropertyStore_GetValue							= 5
+      	IPropertyStore_SetValue							= 6
+      	IPropertyStore_Commit							= 7
+      	
+      	// DLLs
+      	SHELL32											= "Shell32"
+      	OLE32											= "Ole32"
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     internal_properties : CAAAAAgAAAASNOIYsm6VSDbPHKS8nKYj9Kh9PIdNoaxJDJ7jSwVwbIg5Pa52tSufN0kjvDnGtLZ1HBS5NzDhuwp0y54Z/IwOY3GVbbBZRP3FWtTAIhHpj3Gj+qrhqCz4KxzpzjXckQ/cbtYMCNFEwBU86eHUDqpmrkFmyVYHl+0DbOEmTerPv8cmdc1htBnD/b4SigTVJLxHC8qDsw==
+     procedure_id : 1957365808247281074
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor(LOCAL sApplicationIdentifier is string = "")
+      
+      nAddress 				is system int
+      nTotal   				is unsigned int = 10
+      COMGUID_IObjectArray 	is GUID
+      
+      // Defines whether the Windows version is valid (Windows 7, 8 or later)
+      mg_bOSValidVersion = (SysWindowsVersion(sysVersionNumber) >= 6.1)
+      
+      // Defines the identifiers of classes and COM interfaces used
+      CLSID_ICustomDestinationList	 = "77F10CF0-3DB5-4966-B520-B7C54FD35ED6"			// Manages the custom elements for the Jumplists
+      CLSID_IShellLink				 = "00021401-0000-0000-C000-000000000046"				// Represents a Windows shortcut
+      CLSID_IShellItem				 = "9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917"			// Represents a file
+      CLSID_IObjectCollection			 = "2D3468C1-36A7-43B6-AC24-D3F02FD9607A"			// Used to enumerate objects
+      IID_ICustomDestinationList 		 = "6332DEBF-87B5-4670-90C0-5E57B408A49E"				
+      IID_IObjectArray		   		 = "92CA9DCD-5622-4BBA-A805-5E9F541BD8C9"			// Represents an array of objects
+      IID_IShellLink					 = "000214F9-0000-0000-C000-000000000046"
+      IID_IShellItem					 = "43826D1E-E718-42EE-BC55-A1E261C37BFE"
+      IID_IObjectCollection			 = "5632B1A4-E38A-400A-928A-D4CD63230295"
+      IID_IPropertyStore				 = "886D8EEB-8CF2-4446-8D02-CDBA1DBDCF99"			// Represents a container of properties
+      IID_IUnknown					 = "00000000-0000-0000-C000-000000000046"				// Base interface of all the COM objects
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN
+      
+      // Convert the GUID string into GUID type
+      COMGUID(COMGUID_IObjectArray, IID_IObjectArray)
+      
+      // Creates an instance of the ICustomDestinationList interface
+      m_ICustomDestinationList = COMCreateInstance(CLSID_ICustomDestinationList, IID_ICustomDestinationList)
+      
+      // Check whether the instance was created
+      IF ErrorOccurred _OR_ m_ICustomDestinationList = NullObject THEN
+      	
+      	// Free the object
+      	delete object
+      	RETURN
+      END	
+      
+      // Defines the identifier if necessary
+      ApplicationIdentifier = sApplicationIdentifier
+      
+      // Retrieves the list of deleted elements
+      COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_BeginList, &nTotal, &COMGUID_IObjectArray, &nAddress)
+      
+      // Links the object
+      mg_RemovedElements = nAddress				
+      
+      // Cancel
+      COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_AbortList)
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1957365808247346610
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+     type : 655360
+   -
+     name : DeleteAllTasks
+     procedure_id : 1957399970434676033
+     type_code : 12
+     code : |1-
+      // Summary: Deletes all the tasks
+      // Syntax:
+      //DeleteAllTasks ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PUBLIC DeleteAllTasks()
+      
+      // Clears the tasks
+      ArrayDeleteAll(mg_arrTasks)
+     type : 458752
+   -
+     name : Refresh
+     procedure_id : 1957401980479445317
+     type_code : 12
+     code : |1-
+      // Summary: Refreshes the Jumplist
+      // Syntax:
+      //[ <Result> = ] Refresh ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	boolean:   True if the Jumplist was refreshed, False otherwise
+      //
+      PROCEDURE PUBLIC Refresh()
+      
+      nAddress				is system int
+      nTotal					is unsigned int = 10
+      COMGUID_IObjectArray 	is GUID
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RESULT False
+      
+      // Convert the GUID string into GUID type
+      COMGUID(COMGUID_IObjectArray, IID_IObjectArray)
+      
+      // Defines the identifier of the application
+      IF mg_sAppID <> "" THEN 
+      	COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_SetAppID, &mg_sAppID)
+      END
+      
+      // Retrieves the list of deleted elements
+      IF COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_BeginList, &nTotal, &COMGUID_IObjectArray, &nAddress) = 0 THEN
+      	
+      	// Links the object
+      	mg_RemovedElements = nAddress			
+      	
+      	// Processes the deleted elements
+      	ProcessDeletedElements()
+      	
+      	// Prepares and adds the categories
+      	ProcessCategories()
+      	
+      	// Prepares and adds the tasks
+      	ProcessTasks()
+      	
+      	// Validates the list
+      	IF COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_CommitList) = 0 THEN
+      		RESULT True
+      	END
+      END
+      
+      RESULT False
+     type : 458752
+   -
+     name : ProcessDeletedElements
+     procedure_id : 1957403058516290761
+     type_code : 12
+     code : |1-
+      // Summary: Processes the elements deleted from the Jumplist by the user
+      // Syntax:
+      // ProcessDeletedElements ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE ProcessDeletedElements()
+      
+      nTotal		 		is unsigned int
+      IElement			is a COMObject
+      nAddress			is system int
+      COMGUID_IUnknown	is GUID
+      COMGUID_IShellItem  is GUID
+      COMGUID_IShellLink  is GUID
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN		
+      
+      // The object is not valid
+      IF mg_RemovedElements = NullObject THEN RETURN
+      
+      // Convert the GUID strings into GUID type
+      COMGUID(COMGUID_IUnknown, 	IID_IUnknown)
+      COMGUID(COMGUID_IShellItem, IID_IShellItem)
+      COMGUID(COMGUID_IShellLink, IID_IShellLink)
+      
+      // Retrieves the number of elements
+      COMCallMethod(mg_RemovedElements, IObjectArray_GetCount, &nTotal)
+      
+      // Browses the elements
+      FOR i = 1 _TO_ nTotal
+      	
+      	// Retrieves the element
+      	COMCallMethod(mg_RemovedElements, IObjectArray_GetAt, (i - 1), &COMGUID_IUnknown, &nAddress)
+      	IElement = nAddress
+      	
+      	// The object is not valid
+      	IF IElement = NullObject THEN CONTINUE
+      	
+      	// Checks whether it is a IShellLink
+      	COMCallMethod(IElement, IUnknown_QueryInterface, &COMGUID_IShellLink, &nAddress)
+      	IF nAddress = 0 THEN
+      		
+      		// Checks whether it is a IShellItem
+      		COMCallMethod(IElement, IUnknown_QueryInterface, &COMGUID_IShellItem, &nAddress)
+      		IF nAddress = 0 THEN
+      			
+      			// We don't know how to process it
+      			CONTINUE
+      		END
+      		
+      		// It's a IShellItem
+      		IElement = nAddress
+      		
+      		// Process its deletion
+      		ProcessElementDeletion(IElement)
+      	ELSE
+      		
+      		// It's a IShellLink
+      		IElement = nAddress
+      		
+      		// Process its deletion
+      		ProcessShortcutDeletion(IElement)
+      	END		
+      END	
+     type : 458752
+   -
+     name : ProcessShortcutDeletion
+     procedure_id : 1957406211022364931
+     type_code : 12
+     code : |1-
+      // Summary: Processes the deletion of a link
+      // Syntax:
+      //ProcessShortcutDeletion (<IShellLink> is COMObjet)
+      //
+      // Parameters:
+      //	IShellLink (COMObject): IShellLink object
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE ProcessShortcutDeletion(IShellLink is a COMObject)
+      
+      sPath 				is string UNICODE on 260
+      sUnicode				is string UNICODE on 260
+      nIndex					is unsigned int
+      nAddress				is system int
+      COMProperties			is a COMObject
+      pclShortcut 			is JumpListShortcut
+      COMGUID_PropertyStore 	is GUID
+      COMGUID_PKEYTitle		is PROPKEY
+      
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN	
+      
+      // The object is not valid
+      IF IShellLink = NullObject THEN RETURN
+      
+      // Retrieves the path of the link
+      IF COMCallMethod(IShellLink, IShellLink_GetPath, &sPath, 260, Null, 2) = 0 THEN
+      	
+      	// For each category
+      	FOR EACH Category, sKey of mg_aaCategories
+      		
+      		// For each element of the category
+      		FOR EACH Item, nElementSubscript of Category.Elements
+      			
+      			// Item can be either a JumplistElement, or a JumpListTask
+      			
+      			// If the path corresponds
+      			IF Item.Path = sPath THEN
+      				
+      				// Deletes the element
+      				Delete(Category.Elements, nElementSubscript)
+      			END
+      		END
+      	END	
+      END
+      
+      // Rebuilds a JumpListShortcut	
+      COMCallMethod(IShellLink, IShellLink_GetArguments, 			&sUnicode, 260);			pclShortcut.Arguments 			= UnicodeToAnsi(sUnicode)
+      COMCallMethod(IShellLink, IShellLink_GetDescription, 		&sUnicode, 260);			pclShortcut.Description	 	= UnicodeToAnsi(sUnicode)
+      COMCallMethod(IShellLink, IShellLink_GetPath, 				&sUnicode, 260);			pclShortcut.Path 			= UnicodeToAnsi(sUnicode)
+      COMCallMethod(IShellLink, IShellLink_GetWorkingDirectory, 	&sUnicode, 260);			pclShortcut.WorkingDirectory 	= UnicodeToAnsi(sUnicode)
+      COMCallMethod(IShellLink, IShellLink_GetShowCmd, 			&pclShortcut.Mode);		pclShortcut.Mode 				= SWITCH(pclShortcut.Mode, exeActive, exeIconize, exeMaximize)
+      COMCallMethod(IShellLink, IShellLink_GetIconLocation, 		&sUnicode, 260, &nIndex);	pclShortcut.Icon 				= UnicodeToAnsi(sUnicode) + [";"] + (nIndex <> 0 ? nIndex ELSE "")
+      
+      // Convert the GUID strings into GUID type
+      COMGUID(COMGUID_PropertyStore, 	IID_IPropertyStore)
+      
+      // Declare a WSTR property
+      VARIANTPROP 			is composed of
+      	Type 				is 2-byte unsigned int
+      	wReserved1			is 2-byte unsigned int
+      	wReserved2			is 2-byte unsigned int
+      	wReserved3			is 2-byte unsigned int
+      	sValue				is string UNICODE
+      END
+      
+      // Describes a Title property (PKEY_Title)
+      COMGUID(COMGUID_PKEYTitle.GUID, "F29F85E0-4FF9-1068-AB91-08002B27B3D9")
+      COMGUID_PKEYTitle.Type = 2
+      
+      // Retrieves the container of properties 
+      COMCallMethod(IShellLink, IUnknown_QueryInterface, &COMGUID_PropertyStore, &nAddress)
+      
+      // Assign the object
+      COMProperties = nAddress
+      
+      // If the object is valid
+      IF COMProperties <> NullObject THEN
+      	
+      	// Retrieves the title
+      	COMCallMethod(COMProperties, IPropertyStore_GetValue, &COMGUID_PKEYTitle, &VARIANTPROP)
+      	
+      	// Read the title
+      	pclShortcut.Title = VARIANTPROP.sValue
+      END
+      
+      // Keep the element
+      ArrayAdd(mg_arrDeletedElements, pclShortcut)	
+     type : 458752
+   -
+     name : ProcessElementDeletion
+     procedure_id : 1957406288331859797
+     type_code : 12
+     code : |1-
+      // Summary: Processes the deletion of an element from the Jumplist
+      // Syntax:
+      //ProcessElementDeletion (<IShellItem> is COMObject)
+      //
+      // Parameters:
+      //	IShellItem (COMObject): IShellItem object
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE ProcessElementDeletion(IShellItem is a COMObject)
+      
+      sPath 		is string UNICODE
+      nAddress   		is system int
+      Category		is JumpListCategory
+      sKey			is string
+      nElementSubscript	is int
+      pclFile		is JumpListFile
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN	
+      
+      // The object is not valid
+      IF IShellItem = NullObject THEN RETURN
+      
+      // Retrieves the address of the element path
+      IF COMCallMethod(IShellItem, IShellItem_GetDisplayName, 0x80058000, &nAddress) = 0 THEN
+      	
+      	// If the address of the path is valid
+      	IF nAddress <> 0 THEN
+      		
+      		// Retrieves the path
+      		sPath = StringRetrieve(nAddress, srUNICODEAddress)
+      		
+      		// Frees the pointer from the string
+      		API(OLE32, "CoTaskMemFree", nAddress)
+      		
+      		// For each category
+      		FOR EACH Category, sKey of mg_aaCategories
+      			
+      			// For each element of the category
+      			FOR EACH Item, nElementSubscript of Category.Elements
+      				
+      				// Item can be either a JumplistElement, or a JumpListTask
+      				
+      				// If the path corresponds
+      				IF Item.Path = sPath THEN
+      					
+      					// Deletes the element
+      					Delete(Category.Elements, nElementSubscript)
+      				END
+      			END
+      		END			
+      		
+      		// Convert the path
+      		pclFile.Path = UnicodeToAnsi(sPath)
+      	END		
+      END
+      
+      // Saves the deleted element
+      ArrayAdd(mg_arrDeletedElements, pclFile)
+     type : 458752
+   -
+     name : ProcessCategories
+     procedure_id : 1957429107493173288
+     type_code : 12
+     code : |1-
+      // Summary: Adds the categories and their elements into the Jumplist
+      // Syntax:
+      // ProcessCategories ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE ProcessCategories()
+      
+      CategoryContent 			is a COMObject
+      IObjectArray 				is a COMObject
+      Element						is a COMObject
+      sKey			 			is string
+      sCategoryName				is string UNICODE
+      Category		 			is JumpListCategory
+      nAddress					is system int
+      bKnownCategoriesAdded 	is boolean
+      nElementSubscript				is int
+      _jmplstElement				is JumpListFile 
+      _jmplstLink					is JumpListShortcut 
+      COMGUID_IObjectArray 		is GUID
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN	
+      
+      // Convert the GUID string into GUID
+      COMGUID(COMGUID_IObjectArray, IID_IObjectArray)
+      
+      // For each category
+      FOR EACH Category, sKey of mg_aaCategories
+      	
+      	// Specific process for the "Frequently opened" and "Recent documents" categories		
+      	IF Val(sKey) IN (jmpFrequent, jmpRecent) THEN
+      		IF bKnownCategoriesAdded = False THEN
+      			COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_AppendKnownCategory, Val(sKey))
+      			bKnownCategoriesAdded = True			
+      		END
+      		
+      		CONTINUE
+      	END
+      	
+      	// If the category contains no element, continue		
+      	IF Category.Elements..Occurrence = 0 THEN CONTINUE
+      	
+      	// Retrieves the name of the category
+      	sCategoryName = sKey
+      	
+      	// Creates a IObjectCollection to store the categories
+      	CategoryContent = COMCreateInstance(CLSID_IObjectCollection, IID_IObjectCollection)
+      	IF CategoryContent = NullObject THEN CONTINUE
+      	
+      	FOR EACH Item, nElementSubscript of Category.Elements	
+      		
+      		// It's an element (IShellItem)
+      		IF Item..Class = JumpListFile THEN
+      			
+      			// Creates a IShellItem from the element
+      			_jmplstElement <= Item
+      			
+      			// Check whether this element has not been deleted by the user
+      			IF DeletedElement(_jmplstElement) THEN
+      				CONTINUE
+      			END
+      			
+      			Element = CreateShellItem(_jmplstElement)
+      			
+      			// It's a link (IShellLink)
+      		ELSE IF Item..Class = JumpListShortcut THEN
+      			
+      			// Creates a IShellLink from the element
+      			_jmplstLink <= Item
+      			
+      			// Check whether this element has not been deleted by the user
+      			IF DeletedElement(_jmplstLink) THEN
+      				CONTINUE
+      			END
+      			
+      			Element = CreateShellLink(_jmplstLink)
+      			
+      		ELSE
+      			
+      			// Don't manage the other types
+      			CONTINUE
+      		END
+      		
+      		// If the object was not created
+      		IF Element = NullObject THEN CONTINUE
+      		
+      		// Adds the object to the category
+      		COMCallMethod(CategoryContent, IObjectCollection_AddObject, Element..Address)
+      	END
+      	
+      	// Retrieves an IObjectArray from the IObjectCollection
+      	COMCallMethod(CategoryContent, IUnknown_QueryInterface, &COMGUID_IObjectArray, &nAddress)
+      	IObjectArray = nAddress
+      	
+      	// If the object is valid
+      	IF IObjectArray <> NullObject THEN
+      		
+      		// Adds the category
+      		SWITCH COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_AppendCategory, &sCategoryName, IObjectArray..Address)
+      		
+      			// Category added
+      			CASE 0
+      				
+      			// Category not added, unknown reason
+      			OTHER CASE
+      				ErrorThrow(1, ErrorInfo)			
+      		END
+      	END
+      END
+     type : 458752
+   -
+     name : CreateShellItem
+     procedure_id : 1957434819799696469
+     type_code : 12
+     code : |1-
+      // Summary: Creates a IShellItem from a JumpListElement
+      // Syntax:
+      //[ <Result> = ] CreateShellItem (<_JumpListElement> is JumpListFile)
+      //
+      // Parameters:
+      //	_JumpListElement (JumpListFile): Element to convert
+      // Return value:
+      // 	COMObject:       Created IShellItem
+      //
+      PROCEDURE PRIVATE CreateShellItem(_JumpListElement is JumpListFile)
+      
+      nAddress 			is int
+      sPath				is string UNICODE
+      COMGUID_IShellItem  is GUID
+      IShellItem			is a COMObject
+      
+      // Convert the GUID string into GUID
+      COMGUID(COMGUID_IShellItem, IID_IShellItem)
+      
+      // ANSI -> Unicode conversion
+      sPath = _JumpListElement.Path
+      
+      // Create a IShellItem from the path of the object
+      API(SHELL32, "SHCreateItemFromParsingName", &sPath, Null, &COMGUID_IShellItem, &nAddress)
+      IShellItem = nAddress
+      
+      RESULT IShellItem
+     type : 458752
+   -
+     name : CreateShellLink
+     procedure_id : 1957436327333306207
+     type_code : 12
+     code : |1-
+      // Summary: Creates a IShellLink from a JumpListLink
+      // Syntax:
+      //[ <Result> = ] CreateShellLink ([<JumpListLink> is JumpListShortcut])
+      //
+      // Parameters:
+      //	JumpListLink (JumpListShortcut - default value=0): Element to convert
+      // Return value:
+      // 	COMObject:      Created IShellLink
+      //
+      PROCEDURE PRIVATE CreateShellLink(JumpListLink is JumpListShortcut = Null)
+      
+      IShellLink 				is a COMObject
+      COMProperties			is a COMObject
+      sUnicode   				is string UNICODE
+      nIndex	   				is int
+      nMode	   				is int
+      nAddress				is system int
+      COMGUID_PropertyStore 	is GUID
+      COMGUID_PKEYTitle		is PROPKEY
+      
+      // Convert the GUID string into GUID
+      COMGUID(COMGUID_PropertyStore, IID_IPropertyStore)
+      
+      // Declare a WSTR property
+      VARIANTPROP 			is composed of
+      	Type 				is 2-byte unsigned int
+      	wReserved1			is 2-byte unsigned int
+      	wReserved2			is 2-byte unsigned int
+      	wReserved3			is 2-byte unsigned int
+      	sValue				is string UNICODE
+      END
+      
+      // Describes a Title property (PKEY_Title)
+      COMGUID(COMGUID_PKEYTitle.GUID, "F29F85E0-4FF9-1068-AB91-08002B27B3D9")
+      COMGUID_PKEYTitle.Type = 2
+      
+      // Creates a IShellLink
+      IShellLink = COMCreateInstance(CLSID_IShellLink, IID_IShellLink)
+      
+      IF IShellLink <> NullObject THEN
+      	
+      	// Retrieves the properties 
+      	COMCallMethod(IShellLink, IUnknown_QueryInterface, &COMGUID_PropertyStore, &nAddress)
+      	
+      	// Retrieves the properties
+      	COMProperties = nAddress
+      	
+      	// If the object is valid
+      	IF COMProperties <> NullObject THEN
+      		
+      		// Mandatory Title property				
+      		sUnicode = JumpListLink.Title
+      		
+      		// Describes a VIANTPROP whose type is UNICODE string
+      		VARIANTPROP.Type 	= 31		// VT_LPWSTR
+      		VARIANTPROP.sValue = sUnicode	
+      		
+      		// Indicates the title
+      		COMCallMethod(COMProperties, IPropertyStore_SetValue, &COMGUID_PKEYTitle, &VARIANTPROP)
+      		COMCallMethod(COMProperties, IPropertyStore_Commit)	
+      	END	
+      	
+      	///// Arguments
+      	IF JumpListLink.Arguments <> "" THEN
+      		
+      		// ANSI -> Unicode conversion
+      		sUnicode = JumpListLink.Arguments
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetArguments, &sUnicode)
+      	END
+      	
+      	///// Path
+      	IF JumpListLink.Path <> "" THEN
+      		
+      		// ANSI -> Unicode conversion
+      		sUnicode = JumpListLink.Path
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetPath, &sUnicode)		
+      		
+      		// If no icon was specified
+      		IF JumpListLink.Icon = "" THEN
+      			
+      			// Use the path of the shortcut (an executable in most cases)
+      			JumpListLink.Icon = JumpListLink.Path	
+      		END
+      	END
+      	
+      	///// Description
+      	IF JumpListLink.Description <> "" THEN
+      		
+      		// ANSI -> Unicode conversion
+      		sUnicode = JumpListLink.Description
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetDescription, &sUnicode)			
+      	END
+      	
+      	///// Icon
+      	IF JumpListLink.Icon <> "" THEN
+      		
+      		// ANSI -> Unicode conversion
+      		sUnicode = ExtractString(JumpListLink.Icon, 1, ";")
+      		nIndex   = Val(ExtractString(JumpListLink.Icon, 2, ";"))
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetIconLocation, &sUnicode, nIndex)			
+      	END
+      	
+      	///// Mode
+      	IF JumpListLink.Mode <> 0 THEN
+      		
+      		// ANSI -> Unicode conversion
+      		SWITCH JumpListLink.Mode
+      			CASE exeActive		: nMode = 1
+      			CASE exeIconize		: nMode = 2
+      			CASE exeMaximize		: nMode = 3							
+      			OTHER CASE			: nMode = 1
+      		END
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetShowCmd, nMode)			
+      	END
+      	
+      	///// Working directory
+      	IF JumpListLink.WorkingDirectory <> "" THEN
+      		
+      		// ANSI -> Unicode conversion
+      		sUnicode = JumpListLink.WorkingDirectory
+      		
+      		// Defines the property
+      		COMCallMethod(IShellLink, IShellLink_SetWorkingDirectory, &sUnicode)			
+      	END
+      END
+      
+      RESULT IShellLink	
+     type : 458752
+   -
+     name : ProcessTasks
+     procedure_id : 1957438771169742154
+     type_code : 12
+     code : |1-
+      // Summary: Adds the tasks into the Jumplist
+      // Syntax:
+      // ProcessTasks ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PRIVATE ProcessTasks()
+      
+      nAddress				is system int	
+      COMTaskContents		is a COMObject
+      COMShellLink			is a COMObject
+      COMProperties 			is a COMObject
+      COMGUID_PropertyStore 	is GUID
+      COMGUID_ListSeparator	is PROPKEY
+      
+      // Declare a BOOLEAN property
+      VARIANTPROP 			is composed of
+      	Type 				is 2-byte unsigned int
+      	wReserved1			is 2-byte unsigned int
+      	wReserved2			is 2-byte unsigned int
+      	wReserved3			is 2-byte unsigned int
+      	bValue				is boolean
+      END
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RETURN	
+      
+      // No action if the list is empty
+      IF mg_arrTasks..Occurrence = 0 THEN RETURN
+      
+      // Convert the GUID string into GUID
+      COMGUID(COMGUID_PropertyStore, IID_IPropertyStore)
+      
+      // "Separator" task
+      COMGUID(COMGUID_ListSeparator.GUID, "9F4C2855-9F79-4B39-A8D0-E1D42DE1D5F3")
+      COMGUID_ListSeparator.Type = 6
+      
+      // Creates an IObjectCollection to store the tasks
+      COMTaskContents = COMCreateInstance(CLSID_IObjectCollection, IID_IObjectCollection)
+      
+      // If the object is not valid
+      IF COMTaskContents = NullObject THEN RETURN
+      
+      // Browses the tasks
+      FOR EACH stTask, nSubscript of mg_arrTasks
+      	
+      	// Creates a IShellItem from the shortcut
+      	COMShellLink = CreateShellLink(stTask.Shortcut)
+      	
+      	// If the object is valid
+      	IF COMShellLink <> NullObject THEN
+      		
+      		// If it is a separator
+      		IF stTask.IsSeparator THEN
+      			
+      			// Retrieves the container of the properties of IShellLink
+      			COMCallMethod(COMShellLink, IUnknown_QueryInterface, &COMGUID_PropertyStore, &nAddress)
+      			
+      			// Assigns the object with the address
+      			COMProperties = nAddress
+      			
+      			// If the object is valid
+      			IF COMProperties <> NullObject THEN		
+      				
+      				// Creates a VARIANTPROP to store the boolean value
+      				VARIANTPROP.Type 	= 11 // VT_BOOL, boolean
+      				VARIANTPROP.bValue = True
+      				
+      				// Defines the ListSeparator property to True
+      				COMCallMethod(COMProperties, IPropertyStore_SetValue, &COMGUID_ListSeparator, &VARIANTPROP)
+      				
+      				// Validates the defined properties
+      				COMCallMethod(COMProperties, IPropertyStore_Commit)				
+      			END						
+      		END
+      		
+      		// Adds the object to the list of tasks
+      		COMCallMethod(COMTaskContents, IObjectCollection_AddObject, COMShellLink..Address)
+      	END	
+      	
+      END
+      
+      // Adds the list of tasks to the Jumplist
+      COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_AddUserTasks, COMTaskContents..Address)
+     type : 458752
+   -
+     name : DeleteJumpList
+     procedure_id : 1957491040907427085
+     type_code : 12
+     code : |1-
+      // Summary: Entirely deletes the Jumplist
+      // Syntax:
+      //[ <Result> = ] DeleteJumpList ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	boolean: True if the JumpList was deleted, False otherwise
+      //
+      PROCEDURE PUBLIC DeleteJumpList()
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RESULT False	
+      
+      // Destroys the JumpList
+      IF (COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_DeleteList, &mg_sAppID) = 0) THEN
+      	
+      	// Deletes all the tasks
+      	ArrayDeleteAll(mg_arrTasks)
+      	
+      	// Deletes all the categories
+      	ArrayDeleteAll(mg_aaCategories)
+      	
+      	RESULT True		
+      END
+      
+      RESULT False
+     type : 458752
+   -
+     name : DeletedElement
+     procedure_id : 1957493562053292612
+     type_code : 12
+     code : |1-
+      // Summary: Checks whether an element was deleted by the user
+      // Syntax:
+      //[ <Result> = ] DeletedElement (<pclElement> is object dynamic)
+      //
+      // Parameters:
+      //	pclElement (dynamic object): Element to check
+      // Return value:
+      // 	boolean:  True if the element was deleted by the user, False otherwise
+      //
+      PROCEDURE PUBLIC DeletedElement(pclElement is object dynamic)
+      
+      // If the Windows version is not valid
+      IF NOT mg_bOSValidVersion THEN RESULT False	
+      
+      pclItem is object dynamic
+      
+      // Browses the deleted elements
+      FOR EACH pclItem of mg_arrDeletedElements
+      	
+      	// If it is a file or a shortcut
+      	IF pclItem..Class = pclElement..Class THEN
+      		
+      		// The paths are identical
+      		IF pclItem.Path ~= pclElement.Path THEN
+      			RESULT True
+      		END
+      	END
+      END
+      
+      RESULT False
+     type : 458752
+   -
+     name : COMGUID
+     procedure_id : 1957803830487299395
+     type_code : 12
+     code : |1-
+      // Summary: Creates a GUID from its string representation
+      // Syntax:
+      //COMGUID (<g> is GUID, <sGUID> is string)
+      //
+      // Parameters:
+      //	g (GUID): IID variable to fill
+      //	sGUID (string): String representing the GUID to create
+      // Return value:
+      // 	None
+      //
+      PROCEDURE GLOBAL COMGUID(g is GUID, LOCAL sGUID is string)
+      
+      sUGUID is string UNICODE
+      
+      // Replaces the spaces and the dashes
+      sGUID = Replace(sGUID, "-", "")
+      sGUID = Replace(sGUID, " ", "")
+      
+      // Deletes the source { and the final }
+      IF sGUID[[1]] = "{" THEN sGUID[[1]] = ""
+      IF sGUID[[Length(sGUID)]] = "}" THEN sGUID[[Length(sGUID)]] = ""
+      
+      // Switch to uppercase
+      sGUID = Upper(sGUID)
+      
+      // Rebuilds the GUID
+      sGUID = "{" + sGUID[[1 on 8]] + "-" + sGUID[[9 on 4]] + "-" + sGUID[[13 on 4]] + "-" + sGUID[[17 on 4]] + "-" + sGUID[[21 TO]] + "}"
+      
+      // ANSI -> Unicode conversion
+      sUGUID = sGUID
+      
+      // Conversion
+      API(OLE32, "CLSIDFromString", &sUGUID, &g)
+     type : 458752
+  properties :
+   -
+     name : ApplicationIdentifier
+     identifier : 0x1b29f6bd0015a15d
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         PROCEDURE ApplicationIdentifier()
+         
+         nAddress is system int
+         
+         // If no identifier was defined
+         IF mg_sAppID = "" THEN
+         	
+         	// If the Windows version is valid
+         	IF mg_bOSValidVersion THEN
+         		
+         		// Attempt to retrieve what could have been defined beforehand
+         		API(SHELL32, "GetCurrentProcessExplicitAppUserModelID", &nAddress)
+         		mg_sAppID = StringRetrieve(nAddress, srUNICODEAddress)
+         		
+         		// If no identifier was defined beforehand
+         		IF mg_sAppID = "" THEN
+         			
+         			// Builds a legal AppID:
+         			// <Company>.<Application>.<Version>				
+         			mg_sAppID = ProjectInfo(piCompany) + ["."] + ProjectInfo(piConfiguration) + ["."] + ExeInfo(exeVersion)
+         			
+         			// Defines the identifier of the application
+         			COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_SetAppID, &mg_sAppID)
+         			
+         			// Defines the unique identifier of the application
+         			API(SHELL32, "SetCurrentProcessExplicitAppUserModelID", &mg_sAppID)
+         		END
+         	END
+         END
+         
+         RESULT UnicodeToAnsi(mg_sAppID)
+        type : 1966080
+      -
+        code : |1-
+         PROCEDURE ApplicationIdentifier(sIdentifier is string)
+         
+         // ANSI -> UNICODE conversion
+         mg_sAppID = sIdentifier
+         
+         // If the Windows version is valid
+         IF mg_bOSValidVersion THEN
+         	
+         	// If the identifier is valid
+         	IF sIdentifier <> "" THEN
+         		
+         		// Defines the identifier of the application
+         		COMCallMethod(m_ICustomDestinationList, ICustomDestinationList_SetAppID, &mg_sAppID)
+         		
+         		// Defines the unique identifier of the application
+         		API(SHELL32, "SetCurrentProcessExplicitAppUserModelID", &mg_sAppID)
+         	END
+         END
+        type : 2031616
+     template_refs : []
+   -
+     name : Categories
+     identifier : 0x1b2a10e1011cbda6
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         PROCEDURE Categories()
+         RESULT mg_aaCategories
+        type : 1966080
+      -
+        code : |1-
+         
+        type : 2031616
+     template_refs : []
+   -
+     name : Tasks
+     identifier : 0x1b2a1100011d3738
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         PROCEDURE Tasks()
+         RESULT mg_arrTasks
+        type : 1966080
+      -
+        code : |1-
+         
+        type : 2031616
+     template_refs : []
+   -
+     name : DeletedDocuments
+     identifier : 0x1b2a634c004aabe1
+     type_code : 103
+     p_codes :
+      -
+        code : |1-
+         PROCEDURE DeletedDocuments()
+         RESULT mg_arrDeletedElements
+        type : 1966080
+      -
+        code : |1-
+         
+        type : 2031616
+     template_refs : []
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : CClasse1
+resources :
+ string_res :
+  identifier : 0x1b29f5cf000f00fa
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

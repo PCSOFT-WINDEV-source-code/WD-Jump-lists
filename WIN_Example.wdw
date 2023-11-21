@@ -1,0 +1,415 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_Example
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : WIN_Example
+ identifier : 0x28f8afff01f25a69
+ internal_properties : CAAAAAgAAACsJMJ/u23xu8VFBJHNLP+yEcxTAmE7WtzY96oB9QsKDo+YRi5oGd6LskabDaK4XR4DB4Yl6nPgk8RXqRzdkpR/M8UwOpHJJtu4kRAm8SJmvz3pQANXW9OHMOI2BZXNl587a0IbRZAtDHg2rUup0HM73QQevhHkjC4z9str8HDgwGlrvla6vrCcIuxfz5BhL6sr3Q4FDAHC9D/R/anO5Kuo+y7OAeJTovSeWLWW+TAaXdP3l+BMBSpZNhgxh9Af3+yUcUIveo+/RCzG/Vx+B4WY0C3oawXDLEoFNWXtjeq1DH1tqp2PQ3dLjRAdBm2DOQ4AWl0rjqRtEe67Qt6T//5+PksspU8octy6n5wt+hyQuDIEM7bdqZRY0yr+9/IYzrqd3G0C9a0pgCTLVc+3I06CaGvoa2sm1+cMQ0MhsMt9OOLTZRBPewl/088XHspwi+bkaabn0gxa3CPt8mKGNcbGj6GPJSw1hSccEL5HxnOxA1fG2C7Cgk5YSlJGc0DyCxltmj3gbxGFapYtyutlsAN2zLVfM5xntT0CLZPGhSqnXO1XNZ/uvp9ZmmhaR7M46b825y2RA4m996KgwQ8aRTOE6hUvBGPdsezGokqFavP4zPZTI85EA+IrtTtNMKyBeCeLXZVR4DsSDfuRrxJ4oqGizaePyjU4jVrPQ3gvNhmJHh9yaSsz4boQy+oU0Ln+kGDKf0cZfvqoU4QxcZ+CA/+cjzImDWzFm7r3T1HxwPQIaRZ90q7BwoSdH1ke3gn/zCuKiKe1xl3FvCDfOB+Y8wJ3RDOy6UYupO1oL9HPr8ILRnadrQ==
+ properties :
+  width : 786
+  height : 596
+  widthClient : 784
+  heightClient : 564
+ controls :
+  -
+    name : STC_The_JumpList_are_used_to_display
+    identifier : 0x28f8afff01f35a69
+    internal_properties : CAAAAAgAAADplnurrb6O62tLA1EY2xPgW0DzsxYldmds1JR35VEzecyEagw+a8E5jIJMCBgbUxk7gLsuROlpm/Aqok0ZGMEvoIMvUuqjywJ/p4JdPvhz1oP013XpWBU7f7VDtlVuUWmznB7UPi2eB81CWnmMgbAopw1g8wKlej2jEzdG1SVgNLLp3o3f6IHa0p/cxANGPZtAsrFm84JcQY73hLdzoUqJELtk62qnZCUBGm7egM9HgcQzM0fk5b3g7d0zdB9EAtZESYFs8ns61I6yZs9oP2FTXqf1nTmckDzqn4opXZNr+98AcOwHWDpPFXSpE+t9zPEb0nw/057qgOyJwtCIUQjhu/jV4K3zaGW68aNQIiAjBTjVJT1JmcxWt3dNnPXGddb5cr6+P3I79zZsmpCI2utsq/9sEavlSLQ3RYwtuj846+hfT30638egQha037PfjdXcdBxBEBXEff4U3iLIl89/Gh59IQWXzj27/wRXiUfenm76/ZnRsC2siuz+y1AUQPiccFqnkCXEgaJPV4kC2G3+aLSm7M7c9HO9lnUBTAx3OEGEOy2Z65SP2H42du2NYdfh0I9K5tcf/g9IOWdqS7x2fX4eHz2xqO3O0O2Kx2aD+03EJ6g/LukMJv8NH137QifHqDTXJZQuMTpk1DbVitird6rSK6Z79A4rTycBWiUL9RPGt86CSFX2CxqvhnYzSqjSpRhUSHdLaieh/S4LGyXDz4EfaOpuME6rZGehIHIu1/NemxCVASK2MQBTkwn7vIyM1f4m+iELL0vFLUPus9yUo/ZVgJkqf/+z40Sr8vmTnVieODrOsbhg4armcoVXF6+Ych3oVN/X+bOfLjQzNi0MJPq9xKm/oQuYyJFQ7Hy0f2GwaypWVdI=
+    properties :
+     x : 6
+     y : 459
+     width : 772
+     height : 99
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+  -
+    name : STC_INFO_TITLE
+    identifier : 0x28f8afff01f45a69
+    internal_properties : CAAAAAgAAADBkvFboZF8BMMwhgVCnbkYrgUnt5eHaFGMhYMvhShFTNJnKXxHPta7RX4gTnv1s8LJCE2Y8Q7Qsy5U3pIzRUty7EklDXgbeSnWXQKSupgwkdmC5Ebh4eLVkdThsThqtda2y3HffR0fVzYz3ChIL2Dws4PPfHksCPPII0k4Ybx6cUGa343XUwXhrlQV9ygLM6MyAkSm6EDCwxtoNInF+V3Fh1ll3GO4ifBA8yW+ZLDpzhRhYRA/UQ+2iKR3wqOy/J2ekNBgCOTzjnJTyMLbBhqoUxTK8o1WgD5EHHWNEUJdjID6K410MM5q8GszkHEPjJDWsAX7mZJfqAWTL7VnAQMmEgS4+Ru2F4Ipa6eskDS7LMlP
+    properties :
+     x : 6
+     y : 442
+     width : 772
+     height : 17
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+  -
+    name : CBOX_ACTIVATEJUMPLIST
+    identifier : 0x28f8afff01f55a69
+    internal_properties : CAAAAAgAAABf7pL/KYYcrFnzGlsVviLQ8B74V6D+ELCseMp98z07ErTL6+DCc+ijS/Dfb/nR+xd5oOfge71LBayRCYoOXJrw5yIkui/OL3zCKbgn1b/0cFXvjEiBViFZcf9BAQTGP+NNUwF07YUYiTwBRlJQSb+fMNIikO0vxeqhm/SGapO5UcJvZ798AeJ6pcZKIVamo56dFO16CLkVB5GnGf3zmdNtGVKt0l4mo/+eaJ0uxs7zeX/xNSynL7KcwXFgwKRwsptOgBWH8KazmM7yqQYwo4E7EodrZdpy13iBje1TGH0M+wLzgcZ4PRGcbfxeksCMdqzRlFo8IvPv3oRoBSLXFyoxdiqm7scFiUMEZvMu/euGdmr9PsozVCAVev2poqio6Y2lAox8WHvZhhi41XAbs9wTKj7mc+SCkvKPB2JYo0MIGJ1EGhRJ7hXJ/Zm5wFnCn2UEauevMqfn3yW1oxDOc+HdNHkIsXMDZzumhcD/WgSAWnB6IrgYqw8JWaGypy96pGmCFr27Pp7AoEduM0HsEYYs1LfwYslLaS4cTq/igRfavjcDHzLIU3UGpmQXa8848PWTD9rXXQ/+OeYJpH6oXSexnZKhDphpvr7diEWcz+RYJa5AD/C/rMtyfPlEcbwpeETZ
+    properties :
+     x : 6
+     y : 5
+     width : 126
+     height : 26
+    options :
+     -
+       internal_properties : CAAAAAgAAABEWS/F46d44mmNZXkswdtx8l6y3/6EwSAHBlJ1kwbMLQzoo7H+W5JP3mvGO+T8JNvr/M4w4ElTZ+oVy4o3OruJa5cr0m1+XIdpHXZ/2DDEtdZwyY6pvXo5KCnMD0GI4osb0N0CMp1v+wZ2LfGCXmX1TTntDxq668mJaLi7ukOdTILnEdRszia1dIiWAQ==
+    type : 5
+    controls : []
+    code_elements :
+     type_code : 5
+     p_codes :
+      -
+        code : |1-
+         
+         CBOX_ACTIVATEJUMPLIST = True
+         ExecuteProcess(CBOX_ACTIVATEJUMPLIST, trtChange)
+        type : 14
+      -
+        code : |1-
+         
+         IF CBOX_ACTIVATEJUMPLIST THEN
+         	
+         	// Creates the JumpList
+         	CreateJumpList()
+         	
+         ELSE
+         	
+         	// Clears the JumpList
+         	JumpListDelete(MyJumpList)	
+         END
+        type : 17
+  -
+    name : IMG_DISPLAYED
+    identifier : 0x28f8afff01f75a69
+    internal_properties : CAAAAAgAAADs8i+5wyr8B6gQ3MFbsKZn8mWRVD35sS0m+T5Tm6/lFVG5nkeHPPFRwp+Tgv7Kt9GIycKxvCUiZ6agDc1Y8Ftz/rB+ocbftZVrLgIOFv1HiyxBfxyWGJj7Rx3bAqRIVltFxMZ1Etnr39mE1eDPtwbuaJBRPMSTMRcyQWKG4vixYCuxveuAP6bJ1OKRfbaMAZPogkoQqkdtIXhExDZ4C8FKO7fqOVPaMAus/AgRSlAq6l8ItjxmRpOKt9+yePDRD3d47uc5JQT9mSVEUq+2si/3b31poptRi1DM2Ck/6EuimKpa3VgadQFTUYcMSqbfUsiSIl0gof7TyitGM5i51Fnf1vw2WxYx3esdnxPUVLHHO1/WX/YUblAg+XQxgoVoIwA4tVgVzNPI4fJROAfD5T+Fm0wbAqMc8Gq49KPmdNFbog7kZfzPhS9H448iBewohsogwuaYl+iiJX7WpZw0L52fw3akN3c8OG+UMhwFUmBUf+9ANeJj6DGJ4PQiOz5B+w==
+    properties :
+     x : 6
+     y : 37
+     width : 772
+     height : 399
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes :
+      -
+        code : |1-
+         
+         OpenInExplorer()
+        type : 66051
+  -
+    name : STC_NOIMAGE
+    identifier : 0x28f8afff01f85a69
+    internal_properties : CAAAAAgAAAByFVu/FEjHRfnEmNm/G9TIq5p58L20VW67OvqWHOR1zv6TFbZsD7/foGiHHnmRkH4mxrmvuKQArKuasvHZi64xttl4AWSpA7uPTQ32wlFn3WZR+7tXlMKL+fhzGXF16ZQoly6pv3tAy5FC2isZFFuHbFlpJ6vFwEvR3bx/PP3xKMLYPxxusgSYZUutz1fd0lmNMz+9oH30ubUGvcb3SkcVSbCifXPh7/6IvlHOCh23UNQ+H34LSYbnCjCL/XqMve9bXFsGG9ur1Ivup17M83MHR52JaYZd43Zzj8H6fVd1U9rmvzc7cY6O/2h7v4FYMLW4fLJHJne10Lo5q/SyiyRVE0Cl6dQAeD/eeHWdtrOPZaAx3RgijO5jyCEkvaygbyc2
+    properties :
+     x : 6
+     y : 37
+     width : 772
+     height : 399
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+  -
+    name : IMG_NEXT
+    identifier : 0x28f8afff01f95a69
+    internal_properties : CAAAAAgAAAAaDtUZ6g8mtVqdJAS5SjzvPyMK1mwPigK19+x5EsGCr8fu3dvwyTwVsSfj2Af+/OnPF47/HZv+JKPhtpf2lJsVId4jaTa5PPXEaMd7Bg0nYl0qd/gJCqOCcxte5oLDznOg7kpWcLovO6BnUbCUFoHD16skjSh6h382GnqacTpgpO6ULuOAODag8okyv5xkkIKMVqrBKVrmgFWNs7tl/CsuHhFFYvnsYOW2qslXAlo3/wi33IJy8vyduXxvm41Wv0qW1m/z6CScSpRpQa6pmncVfJNvCqtPnEC99scxf16mT69v51/C6+Bvd/K1k5z7TuKZIKElWzYEBw739hJapKqsV+zkspAHZGnacipPyilZnnv0IPkW/leb7zaJmRsAh6Rl66yFLLMD8NLg8yc8FguJyKC+gZ/vx+mzPU9PSNBGU4LK4PBFmX2h+yqN0so1yCN7R1/JSrBTZmA/JjcMMHRuyXy+/7G8G+5ql/KZYQvZd1/aFqKPGqtUUgQNa38METy0F7lFx20s7R1FaP5isvZfPFdESCjiQqQoz7HT4qq9QPk85t/I7fKgqEi79dp1/Q4=
+    properties :
+     x : 760
+     y : 7
+     width : 18
+     height : 18
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes :
+      -
+        code : |1-
+         
+         NextImage()
+        type : 18
+  -
+    name : IMG_PREVIOUS
+    identifier : 0x28f8afff01fa5a69
+    internal_properties : CAAAAAgAAAD7wFmtD/zyPMzmlHR7zUeQ3xjeCUTWI9ivNroWleCYP2yeYYJBGWVj4/InQZcQT3DC4nHciVkcPy4ac1eBYwxerPYzn+a0QyCKPZFWC838PSucm4RkvRBAvlscKyWw9CpyIrr4vAdQgrBDVJjB1vEXWoZ09nNAkwSW7sJDl2DGpEjYNscqxtuc4rVQO+Tz1UbGd0HwMRviB2yOTcRGEbflQ/mK3dPVL4urKmqtQOhPEpNfX6fUyzpniw4x45ElFEXRiNSGcG8i/WucNnew3CWnBsvA6QZd6FFMKJVyvml64Tu5lyqSr0LV+ZNspkgW/Hv/tXdcYi7rR3JFoYwaDX2P66X9Smtq3OiX97lMnPiFXGRA2WWXjbE07yXycd3FTTe1T80cSVMTuzG90XMUV+Xh5KBLEJH7zitdEKwesRPhxrJBl3kBgR75ebbmIqfWehGnGJYIZg0o9AKvYNDC1OHaNdDIs6pEXJW8hwOcrew0IJQfQD6oXibciqnsIqOLJ8pyl+xzGOI4owNYpG1mpuq+W7FChM1lm+DAkizkgQ+0yY51MJNT98dfPunyrF2EzFVDuvYcP9Tycw==
+    properties :
+     x : 736
+     y : 7
+     width : 18
+     height : 18
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes :
+      -
+        code : |1-
+         
+         PreviousImage()
+        type : 18
+  -
+    name : STC_IMAGENAME
+    identifier : 0x28f8afff01fb5a69
+    internal_properties : CAAAAAgAAACfcw7p+YPc5hrG5VbhjwdkezdvYdpea9O9Sdl/qrlz2A1TWezA02keWlqF74HWGOw7m0icfX0n6vqPHc1PUBgM/K82GEPoVcP/xK29wT8JHXSLAS7HQTMML2puH+7ZZbklUzdZNaUQv5XUyN8zPXzQHP8KQrmnembBHe46IGI04pNvPwpmghSf8YQXKlcBjDl+9WCrGZCkNMHjHlw0/AnoXD0HVYR/OgC44184NMz+NF54uLNdr8ybIUbG5zfyoBG0mdPswHFL4TcoOkG0sHizOsooDSBX1e2Wx+TQQ2t+TD6jPeB76GxbIPvRfjDb4YdUW05k0J5khM4EYzg=
+    properties :
+     x : 188
+     y : 7
+     width : 542
+     height : 18
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+ menu :
+  name : _Menu
+  identifier : 0x2b2f43933a42a521
+  internal_properties : CAAAAAgAAAAjoO+VYAXYh2SYpTvD7AgXCHEHRjuTd5K/qNR3zUpM1aIlQYejrbtK76/LWLozAhgdmcRuoxDXe7vi3lf8PoZYYzNtPYlgCK9AarNrSCSSPpGDp+KLIikSwO2L+lCfwFobS8WKQZu2noN9WV5ipxuLKjTaOvfojbcmu1i6FPrF8FEPa+oQBHdRyMYNLYyLF/nTGn2y7NBixG5dC7y2wsO4aXA1CKpzZUca8sBJUrSr9FqhTJMK37pOOZqMTeCIo+trbOMI1osTdzjD26auXrzETrP8OxsAt+HgvahLwDb4kRpR6lQOjBIj
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAACYjwy+9TkH6cu2duCPbc2glNg/QlrY+Awwl8TzstppQ00WRwXKPPt/PcFWhYBRy+Y45AjjYFL1cS3UnpPWRSwNgEP3OZC5t005bYU1xmmhpoore7aImyYLIFHZ
+ actionbar : {}
+ code_elements :
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      
+      GLOBAL
+      	
+      	garrImages 				is array of strings
+      	gnSubscript   				is int
+      	SUBSCRIPT_NEXT_TASK	is int
+      	SUBSCRIPT_PREVIOUS_TASK	is int
+      	SUBSCRIPT_TASK_OPENEXP	is int
+      	
+      LOCAL
+      	
+      	// Retrieves the images found in the "My Images" directory
+      	sListImages is string = fListFile(SysDir(srMyPictures) + ["\"] + "*.*", frRecursive)
+      	
+      // Browses the files
+      FOR EACH string sImage of sListImages SEPARATED BY CR
+      	
+      	// If the image is valid
+      	IF Position(fGraphicFilter(), "*" + fExtractPath(sImage, fExtension)) > 0 THEN
+      		
+      		// Keeps the path
+      		Add(garrImages, sImage)
+      	END
+      END
+      
+      // First image
+      gnSubscript = 1
+      
+      // Displays the image
+      DisplayImage()
+   -
+     code : |1-
+      
+      // Adds the browse buttons into the miniature
+      SysThumbnailAddButton(fExeDir() + ["\"] + "previous.ico", 	"Previous image", 	PreviousImage)
+      SysThumbnailAddButton(fExeDir() + ["\"] + "next.ico", 		"Next image", 	NextImage)
+     type : 34
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+      // Delete the following tasks: "Open in the explorer", "Next image" and "Previous image"
+      JumpListTaskDelete(MyJumpList, SUBSCRIPT_NEXT_TASK)
+      JumpListTaskDelete(MyJumpList, SUBSCRIPT_PREVIOUS_TASK)
+      JumpListTaskDelete(MyJumpList, SUBSCRIPT_TASK_OPENEXP)
+      
+      // Refreshes the JumpList
+      JumpListRefresh(MyJumpList)
+     type : 2
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+  procedures :
+   -
+     name : CreateJumpList
+     internal_properties : CAAAAAgAAABHeCNr+cwsIF23LgASm9In1KfAWlBynNBsTk/ZTKFCBDRxnX6QFXGcB/lgGKyQEVouiAII76MKKW31Xr9/iS+NED8C3xEujb/N95IGE66tz2oJ7QA5BkhgtSpyxwbX1O7NXw9fy9Zf13zTvPT5UyfVH7K/CKOWKApUTVYxbvzFEXUb6APP1RxDguR56mZuCb4B0a/5l31c23fLOLS9kBypXuvX2P3VJe9okAc+wKqx1jmvtpSg
+     procedure_id : 1799381560916466281
+     type_code : 14
+     code : |1-
+      // Summary: Creates the JumpList
+      // Syntax:
+      // CreateJumpList ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE CreateJumpList()
+      
+      sExecutable is string
+      sExecutable = (InTestMode() ? fExeDir() + ["\"] + ProjectInfo(piProjectName) + ".exe" ELSE ExeInfo(exeName))
+      
+      Separator is JumpListTask
+      Separator.IsSeparator = True
+      
+      // Adds the opening task into the explorer
+      SUBSCRIPT_TASK_OPENEXP = JumpListTaskAdd(MyJumpList, JumpListCreateTask("Open in the explorer", sExecutable, "/open"))
+      JumpListTaskAdd(MyJumpList, Separator)
+      
+      // Adds the browse tasks
+      SUBSCRIPT_PREVIOUS_TASK = JumpListTaskAdd(MyJumpList, JumpListCreateTask("Previous image", sExecutable, "/previous"))
+      SUBSCRIPT_NEXT_TASK   = JumpListTaskAdd(MyJumpList, JumpListCreateTask("Next image", sExecutable, "/next"))
+      
+      // Icons
+      MyJumpList.Tasks[SUBSCRIPT_PREVIOUS_TASK].Shortcut.Icon = fExeDir() + ["\"] + "previous.ico"
+      MyJumpList.Tasks[SUBSCRIPT_NEXT_TASK].Shortcut.Icon = fExeDir() + ["\"] + "next.ico"
+      
+      // Refreshes the JumpList
+      JumpListRefresh(MyJumpList)
+      
+      Info("To view the JumpList, right-click the icon of the application in the taskbar") 
+     type : 458752
+   -
+     name : DisplayImage
+     procedure_id : 1799381560916531817
+     type_code : 14
+     code : |1+
+      // Summary: <specify the action of the procedure>
+      // Syntax:
+      //DisplayImage ([<nDirection> is int])
+      //
+      // Parameters:
+      // 	nDirection (integer - default value=0): <specify the role of nDirection>
+      // Return value:
+      // 	None
+      //
+      // Example:
+      // Indicate an example.
+      //
+      PROCEDURE DisplayImage(LOCAL nDirection is int = 0)
+      
+      AnimationPrepare(IMG_DISPLAYED)
+      
+      IF 0 < gnSubscript < garrImages..Occurrence THEN
+      	
+      	// Adds the image to the recent documents
+      	SysRecentDocAdd(garrImages[gnSubscript])
+      	
+      	// Displays the image
+      	IMG_DISPLAYED = garrImages[gnSubscript]		
+      	STC_IMAGENAME = Replace(garrImages[gnSubscript], SysDir(srMyPictures) + ["\"], "")
+      	STC_NOIMAGE..Visible = False		
+      ELSE
+      	
+      	STC_IMAGENAME = ""
+      	IMG_DISPLAYED = ""
+      	STC_NOIMAGE..Visible = True		
+      END
+      
+      IF nDirection = 1 THEN
+      	
+      	// Makes the image scroll from the left to the right
+      	AnimationPlay(animScrollLeft)
+      ELSE IF nDirection = -1 THEN
+      	
+      	// Makes the image scroll from the right to the left
+      	AnimationPlay(animScrollRight)
+      ELSE
+      	
+      	// Fade-in
+      	AnimationPlay(animFadeIn)
+      END
+     type : 458752
+   -
+     name : NextImage
+     procedure_id : 1799381560916597353
+     type_code : 14
+     code : |1-
+      // Summary: Goes to the next image
+      // Syntax:
+      //NextImage ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE NextImage()
+      
+      // Next subscript
+      gnSubscript ++
+      
+      // Loop if the subscript is greater than the number of images
+      IF gnSubscript > garrImages..Occurrence THEN gnSubscript = 1
+      
+      // Displays the image
+      DisplayImage(1)
+     type : 458752
+   -
+     name : PreviousImage
+     procedure_id : 1799381560916662889
+     type_code : 14
+     code : |1-
+      // Summary: Goes to the previous image
+      // Syntax:
+      //PreviousImage ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE PreviousImage()
+      
+      // Previous subscript
+      gnSubscript --
+      
+      // Loop if the subscript is less than 1
+      IF gnSubscript < 1 THEN gnSubscript = garrImages..Occurrence
+      
+      // Displays the image
+      DisplayImage(-1)
+     type : 458752
+   -
+     name : OpenInExplorer
+     internal_properties : CAAAAAgAAAAcZxh+BQgKKcbmOy1Kytvu64CsXOpPIX4c9jjVHXi6NwLPQdT5vgTtLHRGkBay5VrwwNzlTmI5k4wYad6kcIRZQ3w6yiRWIxpKUu6iDOUOfT6zGdW9RvOAHHH8/lO8BqejUmEz9Ml1LmCbtrVcsDlYRTM/EvitqL+IdXSGRelHPrZYisLPDlVA1PHTeTx8DUd5xlEs5+w=
+     procedure_id : 1799381560916728425
+     type_code : 14
+     code : |1+
+      // Summary: Opens an explorer on the image displayed
+      // Syntax:
+      // OpenInExplorer ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE OpenInExplorer()
+      
+      // Opens an explorer on the image
+      ExeRun("explorer.exe /select,""" + IMG_DISPLAYED + """")
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FEN_Fenêtre1
+resources :
+ string_res :
+  identifier : 0x1b2a02b2000e54e4
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

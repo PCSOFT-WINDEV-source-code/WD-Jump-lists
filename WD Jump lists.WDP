@@ -1,0 +1,141 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Jump lists
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : ""
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : CAAAAAgAAAB6tTkKnF0L4njec9kMJJ0kAIfTdyeOzOtBWiXQcOvEuHGPZKjfSAvq6D00o4wFq7Vn8RZeipHYfQtJoXJoK5Ceq38zgGPptEHA0ZF3dAhnUfAUVlYji8vgQxMonkG18PruFiX721xd3/P8P4Q1hBfugQsXOkrJtIoTl9ond5vMDcuRZmoqVOa2KvucIftGQXNixVto1a8yuj40OSoTJmf2xuZalZF0dn6qnHY1sCTA09Mst8uoSNQy48D4Mo1rA3MAh8mSlK/tU9DkjVFBwkwUldO+vwEGLhcikj03ISis49MowPsCgJa2FuqqxH8kdUgSGerqmfsNcV7+vlyWA/bVTduXqh5k2InED33uLMhJtQpa5LBQxZ4lDhBEfEz6DpPJeamYbCEcFQVn6ub80weC5Ef34I5nPN0pZG/P890DBHnY7Lqg6vxjt8fmqMjK23dABdtw7lM3xvMZR5GlSqWvvhr2a2B15snzHd6odrjN16w3KAN1FvGUWzFMFjCqvY21c6/Cgr+kC9Lipn+FxtvuRKI5F/5/UC5/fn4M7beweS0ZaZt8ThAMfvVnecmX1ET9x/hHpD0B2SMP2Y/gME8Wr7NH7X7jEnWy1RDrxtZFeIwSNQBOJyCuPmO/8tHPcBxWN6aQJdiTb/v2Ro3ki1TR/cbkhYVY80yKekklHQObKAzSgL1RAdQ2KbyvGa1W3UX/wqKdSkBQj248cjpQ51EsZ4F8bkSlSogCVp9HlYRqJ83FUxoDvKBvdLLe6cJZgQKbourUpH+TGAC9puGaRfne9JLOleFHEa5etn9Li4aRyl2cRXgIdK0QSgCAVd1Rqlgox7OHAw0mdgSYBQHyUSjSBV+WSw3FcfzEoVXY6nhlyg4luFL9B79Etsb+r4p3vtZsNR4++bVd98Qk29oIURKsYqFrBWg0vI3WghbREtNllvOzOScZGUuQjc0w4qESWArCJljnQA6ruXDHG6DbRFxUdKjhrsrMotAQBjbYHqw/XR6zCGoafJSarXEwGQSuWLoA9em+6JtJ0I47mh0L4v9nUfdsFQ6fCgX6iUBrnVsHjo2mkFx7+PmP0IPPgStuKhKQarIh9GtSBX/cynxt8BI+bGxNMriaGEg7OtW1ofM99bT+RbSHkI+LW/QhJnVquZ6p1sOgsWnULaC27CAFl3KRDF1fUbC8EcqsQHYhK/Jb6qXNHqyOHFyQCwf/4QGLyAT75vFbQroeAxfiMmhQ85KKc6s9NPM7NrDEOP3XzjpBtbVYSloMMjEKgarUwgrYRYX71Y0XoUMF9dfrbs0PYaqoLaVdLMZHYA6hVeLGKGXoJ748Ilqxbb7oofszrPhhfb0JQt6Hn41M+7H0C08bcqu/skkC93kCRr//A1OpVPkcqhsNESXkQMiZAqgMkcf5EkCfv5Uwro5L5tK2crJMwyupGuhHlQbeO98Ume5uwpvoLxudTbNNEfS+u73lX+p5QN43UCelp5CBty9Y+2s6CoD21Ai5q031dG/T1IDPFsPY9Szehislf6ZWwMatZ4f3NiRFqaH87HsTyRt6wR9hzt4x6kWBXApwCXu4d2gwpODMp8/P1i7x63H+G2gh0pE2TwjgYjqEnN+yoBAxLiTRfGtUI8oXucVgDjThTYJxFynjPRMK4x66NGC9MIlED59W6Oy68h72wh8rRKbmb2N1w5zU499r93cnOEQoCX4lLgcce2Ygsq2Vkbz0D6CCsOO4wL4UCb7/DFcUg+BcFqwiAXWynCbPxCel4VvEaFrR5QgIsNtoNPv+n9Awr6CAMD0Z179pCXvdRe/ZFZ3cSB83q+QcnKvRz/lNW/hjZXfrZAbMtk4Zya+Qr/UpqpRiHECeAgCApsLTUwGNP56YgVaw5n057b3GTirr0aRGCKs3Go8/y2zyiK1/CoMtLjRpJ0JGDi9426ZG9tgr2UhToiez1W+nzj8ibHCfp5eIgA==
+ configurations :
+  -
+    name : WD Jump lists
+    internal_properties : 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
+    configuration_id : 12906163918150867074
+    type : 1
+    generation_name : WD Jump lists.exe
+    version :
+     major_version : 22
+     minor_version : 59
+     internal_generation_version : 8
+     autoincrement_version : false
+    icon_filename : .\taskbar.ico
+    language : 2
+ elements :
+  identifier : 0x4b29f5050002eb67
+  elements :
+   -
+     name : pVarious
+     identifier : 0x4b2f479f001272dc
+     internal_properties : CAAAAAgAAADjX9vP/KkBGiW4eZDc5fo0y4SWFriYA62KOLpNVsVJ/zXL3a1mntHPgrwmkhLOqh7mbg==
+     physical_name : .\pVarious.wdg
+     type : 7
+   -
+     name : WIN_System
+     identifier : 0x4b2f429f000fe933
+     internal_properties : CAAAAAgAAACoppCMO2BIUxzv1OP/8Yc5yIWXnzFBpBWKFLuHpkXPATfL36t7gb46OePd21uVbWOttQ==
+     physical_name : .\WIN_System.wdw
+     type : 2
+   -
+     name : WIN_Example
+     identifier : 0x4b2a02b6000c673c
+     internal_properties : CAAAAAgAAADDvztvXAkhOoVYGbA8xKbQnz5mvoLN3s2OG/cLM+iqVu4G/oyGvvHv4lxGsnJuCv7GTg==
+     physical_name : .\WIN_Example.wdw
+     type : 2
+  other_elements : []
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components :
+   -
+     physical_name : .\JumpList\JumpList.wci
+ report_and_queries_enabled : false
+ common_generation_directory : true
+ languages :
+  - en-GB
+ code_elements :
+  internal_properties : CAAAAAgAAABseimUYz4VdXZ8hGsGFqoxLDfDcHkNZdBf0iQg2FQcqmw5VrO2lryVMt3efm9RagPlXJBReauIsX3ZdB8=
+  type_code : 0
+  p_codes :
+   -
+     code : |1-
+      
+      GLOBAL
+      	MyJumpList is JumpList
+      MyJumpList.ApplicationIdentifier = "PCSOFT.JumpList." + WinDevVersion(versionFramework)
+      
+      LOCAL
+      	
+      IF InTestMode() THEN	
+      	Warning("To benefit from the features of this example, it should be started from the executable and not in test mode")	
+      END
+      
+      // The JumpList is used to add tasks.
+      // These tasks can re-run your application with one or more parameters of the command line.
+      // To avoid running another instance when your application is run, we advise you to check the parameters of the command line and to transmit them
+      // to the instance that is currently run.
+      
+      // Check whether an instance is currently run
+      IF ExeRunning(ExeInfo(exeName)) > 1 THEN
+      	
+      	// Retrieve the handle of the "system" window of the application (WDJumpListWindow)
+      	// that will receive the messages sent
+      	nHandleInstanceRun is system int = SysWinHandle("WDJumpListWindow")
+      	
+      	// Start to give focus back to the application
+      	SysWinActive(nHandleInstanceRun)
+      	
+      	// Retrieves the command line
+      	sCommandLine is string = CommandLine()
+      	
+      	// Opens a shared memory zone
+      	nIDMemoryZone is int = fMemOpen("ExternalCommandLine", 1024)
+      	
+      	// If the zone was successfully opened
+      	IF nIDMemoryZone > 0 THEN
+      		
+      		// Writes the command line into the zone
+      		fWrite(nIDMemoryZone, sCommandLine)
+      		
+      		// Sends a message to the instance currently run to inform it
+      		PostMessage(nHandleInstanceRun, "ExternalCommandLine", Length(sCommandLine), ExeGetPID)
+      	END
+      	
+      	// Ends the application
+      	EndProgram(True)
+      ELSE
+      	
+      	// Opens a hidden window (WIN_System) that will be used to receive some information from other instances
+      	OpenChild(WIN_System)	
+      	
+      	// Processes the command line
+      	ProcessCommandLine()
+      END
+     type : 196608
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : WD Jump lists
+     identifier : 0x4b29f5050003ec42
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==

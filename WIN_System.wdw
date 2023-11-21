@@ -1,0 +1,113 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_System
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : WIN_System
+ identifier : 0x28f8b00102246352
+ internal_properties : CAAAAAgAAACKvY2cHHU1fJyfPSZDfy22hedufvJEa2zG2QaIVKpCnpElwb5WTBctutcWFrsu+64iwsc436k6a3d6noMy5qhNhzrTGIYO80kLKYyNTI9SOdN56mJQ+iLNOsWpnvUu9CWj8gJU9criU3/y2ndNefUOZ9RX2lcq6t4DK9/JusYIoTxm+aTSJEiqmzGQDQIZQXK1fbWUepveSjxbx84rRVb+obVIxEGAgQA4lb5AxKC/a+uyAapnmo3NPzjj1UI4M+hGbASAm6ZCStpEO4a2c1eulcML5jPIHZoxN6q4rKZi5ok0YlUxTKz5/IyS7hDrcuC/dB9+feIBLTEPSZOa7S8oUWQVeRgwMlTAgNaMRdy+lqLtcaUQSvdJBxjedPejnCjalg66TkIb13KqQpl0Q1xwRzUtpCxC994QkZBzHLvGzqUWjGt0qvfVBWsOZ/jRAAxtWyN+7PrpKxlapO8QkWtKbJ57yc07sGGx0/tQKiT1L4X6qxfjXnaUcIpr+IjmwVXkNTjbSGQqceMc7uUAkVzQXSHSCAWT7VPVXYfnj88vsZ+3WG2yrHLe9IZ29/wL5NUsXEMc4YpphClLy7JFfK/9Pu/4JUwroT7n5xgFRLxpUdrAOQGLb8M1N8ZDDmZ6/DornJhdG/tJgHGAjolHuKFnS0atFmLDN0D3yvImoU7Hv24=
+ properties :
+  width : 250
+  height : 50
+  widthClient : 248
+  heightClient : 48
+ controls :
+  -
+    name : STC_TITLE
+    identifier : 0x28f8b00102256352
+    internal_properties : CAAAAAgAAABEH7x68GsrBqKClN3Gk1tM5MVuF2ZIv6N1qfAH42slXdmiHP+tQLEGDi94yirW/3FkvakvIOUaGPlJ8HqDKV381OyrVweXpHcMAwP+T67hbflil867f7yMgMTtjf5vbXcPhoUK019KvwyrngBBuJj339qLiX7YhQ1fiujuhtEmbh+gH1rV2kXmd/0uwgB8ycHj8aojQp7ZuzZW52lGKEhhdtOBmRfTL4LzGWgCB0t6qraWIqrgGjLv5DDpJekp2td2AWvO/08vf3OsTExvod+ZubjoFd+9dYlmNXwhWCjG4+7cqo/8HCw2lRcFd72SvOGP7Au+VGiN4s5w47q3APrwWOnoDQatPGmjxIKiQ441RptFxQ==
+    properties :
+     x : 6
+     y : 6
+     width : 236
+     height : 36
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+ menu :
+  name : _Menu
+  identifier : 0x2b2f429b13a0dad1
+  internal_properties : CAAAAAgAAABZbVENyOU0I9t+noUr49j8G6eY4Qr8d6Sp9t6EUJonAajxD+/uNw75l/RKIVMIkPd5BmoWWnibmGvRUwANyOtYuesPqA2mwtXJm7NaencJlSOCmL1u3wPy8naR3+VuKPSlI0xtsRfvvxBwQcL9IO0I1RkVkVm4aOYs8uA2Fv91A0dErTPA7ocWH82bB3QAmoDGsc2tnsQDettohMfFpCr7ZzcULBEA206Qfv2TZqW6YSF/s3UoYSKK4MfC6rPCTvUM6L6HgjHcXx6sjx64AYvJofqMCKKITCYmktDjMv1r/nio9FuV4TY=
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAADA92SGXVEv4dMuDojndeWI7BBHenKCnagbkA7IARq5882W91V6rAuvHUHGVcD5Y07Q/DCLCJptaQXMltsefbUpcPQDbWzh33URtV0d7lG5vqLDg75w837jyImB
+ actionbar : {}
+ code_elements :
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      
+      // Lists to the events of external command lines
+      Event(OnCommandLine, "*.*", "ExternalCommandLine")
+      
+      // Opens a shared memory zone
+      gnIDMemoryZone is int = fMemOpen("ExternalCommandLine", 1024)
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+  procedures :
+   -
+     name : OnCommandLine
+     procedure_id : 1799381569507058514
+     type_code : 14
+     code : |1-
+      // Summary: Run when another instance of the application sends its command line
+      // Syntax:
+      // OnCommandLine ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //
+      PROCEDURE OnCommandLine()
+      
+      // Retrieves the command line
+      sCommandLine is string = fRead(gnIDMemoryZone, _EVE.wParam)
+      
+      // Closes the zone
+      fClose(gnIDMemoryZone)
+      
+      // Re-opens the zone
+      gnIDMemoryZone = fMemOpen("ExternalCommandLine", 1024)
+      
+      // Ends the instance passed in parameter
+      ExeTerminate(_EVE.lParam)
+      
+      // Processes the command line
+      ProcessCommandLine(sCommandLine, True)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FEN_Fenêtre2
+resources :
+ string_res :
+  identifier : 0x1b2f4275000d47e5
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

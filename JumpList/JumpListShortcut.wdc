@@ -1,0 +1,61 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : JumpListShortcut
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x18f8b00301e86ab5
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAADZD6XckEJIYhJRp1vqJE43Q2xT1o1QbR7qlp5Wk2BxYGohFPbEoxfLz4m3QtRbAZ5DryAy0k1vZobpMaj/lRmdypna7Tf
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAABnUWatbRv1svuAG+6YI0BZP6HEEPjRI6eT/u/EJLHnh0Wobgxr9Mmh7C+fkLSCBS7jHnJ8AHgQwtiHzvOiLsyuB2+S4b/i3k5u6Fjy2CAm9IXHFsmseazNGmo7QkGnFT5/8+2fHPj+RgiqWwA=
+     code : |1-
+      // Describes a Windows shortcut
+      JumpListShortcut is class
+      	inhérits of JumpListFile
+      	
+      PUBLIC
+      	// Inherited from JumpListFile:
+      	// Path			is string		// Path of the program
+      	Arguments			is string		// Argument of the command line (mandatory for the tasks)
+      	Description			is string		// Description of the shortcut (tooltip)
+      	Icon 				is string		// Path of the icon associated with the shortcut
+      	Mode 				is int		// Opening mode of the program (exeActive, exeIconise, exeMaximize)
+      	WorkingDirectory	is string		// Working directory of the program
+      	Title				is string		// Title of the shortcut (mandatory for the tasks, not taken into account for the documents)
+      	
+      END
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     procedure_id : 1799381578097978037
+     type_code : 27
+     code : |1-
+      PROCEDURE Constructor()
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1799381578098043573
+     type_code : 28
+     code : |1-
+      PROCEDURE Destructor()
+     type : 655360
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : CClasse1
+resources :
+ string_res :
+  identifier : 0x1b2a54e100355a09
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

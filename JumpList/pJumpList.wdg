@@ -1,0 +1,526 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : pJumpList
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x1b29f59d000d3d4e
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     code : |1-
+      
+      CONSTANT
+      	jmpFrequent	= 1
+      	jmpRecent	= jmpFrequent + 1
+      END
+      
+      // Describes a category for the Jumplist
+      JumpListCategory is Structure
+      	Elements	is array dynamic of objects dynamic
+      END
+      
+      // Describes a task for the Jumplist
+      JumpListTask is Structure
+      	IsSeparator		is boolean
+      	Shortcut			is JumpListShortcut
+      END
+     type : 720896
+  procedures :
+   -
+     name : JumpListElementAdd
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957478452357776300
+     type_code : 15
+     code : |1-
+      // Summary: Adds a document or a shortcut to a JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListElementAdd (<pclJumpList> is JumpList dynamic, <sCategory> is string, <Element> is object dynamic)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	sCategory (string): Category into which the element must be added (to add into the "Frequent" or "Recent" category, use the jmpFrequent and jmpRecent constants)
+      //	Element (dynamic object): Element to add (JumpListFile or JumpListShortcut)
+      // Return value:
+      // 	boolean: // 	None
+      // Notes:
+      // - The list of elements is global to all the JumpList declared in the project
+      // - If the added element is a JumpListShortcut:
+      //   * The Title property is mandatory
+      //   * The Arguments property is mandatory
+      // - If the added element is a JumpListFile:
+      //   * The current application must be saved as application associated with the specified document. Otherwise, none of the category elements will be added to the JumpList.
+      //   * If the element was manually deleted from the list by the user, it will not be added to the JumpList. 
+      //     To re-display an element deleted by a user, JumpListDelete must be called before adding the elements.
+      // - The JumpListFile elements can be manually deleted by the user
+      // - The JumpListShortcut elements cannot be deleted by the user
+      // - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListElementAdd(pclJumpList is JumpList dynamic, LOCAL sCategory is string, Element is object dynamic)
+      
+      _jmpCategory  is JumpListCategory
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // Checks the type
+      IF NOT Element..Class IN (JumpListShortcut, JumpListFile) THEN 
+      	ErrorThrow(1, Element..Class + " is not a valid type")
+      		RESULT False
+      	END
+      	
+      	// If the category does not exist yet
+      	IF pclJumpList.Categories[sCategory] = Null THEN
+      		
+      		// Creates a category
+      		VariableReset(_jmpCategory)
+      	ELSE
+      		
+      		// Retrieves the elements of the category
+      		_jmpCategory = pclJumpList.Categories[sCategory]
+      END
+      
+      // Adds the element into the category
+      ArrayAdd(_jmpCategory.Elements, Element)	
+      
+      // Keeps 
+      pclJumpList.Categories[sCategory] = _jmpCategory
+      
+      RESULT True
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListTaskAdd
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957480702920835716
+     type_code : 15
+     code : |1-
+      // Summary: Adds a task into the JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListTaskAdd (<pclJumpList> is JumpList dynamic, <Task> is JumpListTask)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	Task (JumpListTask): Task that must be added to the JumpList
+      // Return value:
+      // 	integer: Subscript of the task or -1 if an error occurred
+      // Notes:
+      //  - The list of tasks is global to all the JumpList declared in the project
+      //  - The Title property is mandatory
+      //  - The Arguments property is mandatory
+      //  - To add a separator, all you have to do is create an empty JumpListTask and to assign the IsSeparator property to True.
+      //  - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListTaskAdd(pclJumpList is JumpList dynamic, Task is JumpListTask dynamic)
+      
+      nSubscript is int
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT -1
+      END
+      
+      // Checks whether this task was already added
+      nSubscript = ArraySeek(pclJumpList.Tasks, asLinear, "Shortcut.Title", Task.Shortcut.Title)
+      IF nSubscript <= 0 THEN
+      	
+      	// Adds the task
+      	nSubscript = ArrayAdd(pclJumpList.Tasks, Task)
+      END
+      
+      RESULT nSubscript
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT -1
+     type : 458752
+   -
+     name : JumpListRefresh
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957481188252253514
+     type_code : 15
+     code : |1-
+      // Summary: Refreshes the modifications made to a Jumplist
+      // Syntax:
+      //[ <Result> = ] JumpListRefresh (<pclJumpList> is dynamic JumpList)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      // Return value:
+      // 	boolean: True if the JumpList was refreshed, False otherwise
+      // Notes:
+      // - The modifications made to the JumpList will be visible after the call to this function
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListRefresh(pclJumpList is JumpList dynamic)
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // Refreshes the JumpList
+      RESULT pclJumpList.Refresh()
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListTaskDelete
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957484985003375284
+     type_code : 15
+     code : |1-
+      // Summary: Deletes a task
+      // Syntax:
+      //[ <Result> = ] JumpListTaskDelete (<pclJumpList> is JumpList dynamic, <nSubscript> is int)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	nSubscript (integer): Subscript of the task to delete (returned by JumpListTaskAdd)
+      // Return value:
+      // 	boolean: True if the task was deleted, False otherwise
+      // Notes:
+      //  - The list of tasks is global to all the JumpList declared in the project
+      //  - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListTaskDelete(pclJumpList is JumpList dynamic, LOCAL nSubscript is int)
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // If the subscript is inside the bounds
+      IF 0 < nSubscript 	<= pclJumpList.Tasks..Occurrence THEN
+      	
+      	// Deletes the task
+      	ArrayDelete(pclJumpList.Tasks, nSubscript)
+      	RESULT True
+      END
+      
+      RESULT False
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListDelete
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957496736034143107
+     type_code : 15
+     code : |1-
+      // Summary: Entirely deletes the content of a JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListDelete (<pclJumpList> is dynamic JumpList)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList to delete
+      // Return value:
+      // 	boolean: True if the JumpList was deleted, False otherwise
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListDelete(pclJumpList is JumpList dynamic)
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // Deletes the JumpList
+      RESULT pclJumpList.DeleteJumpList()
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListElementDelete
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957497384574682884
+     type_code : 15
+     code : |1-
+      // Summary: Deletes a document or a shortcut from a JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListElementDelete (<pclJumpList> is JumpList dynamic, <sCategory> is string, <Element> is object dynamic)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	sCategory (string): Category of the element (to delete from the "Frequent" or "Recent" category, use the jmpFrequent and jmpRecent constants)
+      //	Element (dynamic object): Element to delete (JumpListFile or JumpListShortcut)
+      // Return value:
+      // 	boolean: True if the element was deleted, False otherwise
+      // Notes:
+      // - The list of elements is global to all the JumpList declared in the project
+      // - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListElementDelete(pclJumpList is JumpList dynamic, LOCAL sCategory is string, Element is object dynamic)
+      
+      _jmpCategory  is JumpListCategory
+      bufElement	   is buffer
+      bufItem		   is buffer
+      nSubscript		   is int
+      bDeleted	   is boolean = False
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // Checks the type
+      IF NOT Element..Class IN (JumpListShortcut, JumpListFile) THEN 
+      	ErrorThrow(1, Element..Class + " is not a valid type")
+      		RESULT False
+      	END
+      	
+      	// If the category exists
+      	IF pclJumpList.Categories[sCategory] <> Null THEN
+      		
+      		// Retrieves the elements of the category
+      		_jmpCategory = pclJumpList.Categories[sCategory]
+      		
+      		// Serializes the element to compare it
+      		Serialize(Element, bufElement, psdBinary)
+      		
+      		// Browses the elements
+      		FOR EACH pclItem, nSubscript of _jmpCategory.Elements
+      			
+      			// If the two elements have the same type
+      			IF pclItem..Class = Element..Class
+      				
+      				// Serializes the item
+      				Serialize(pclItem, bufItem, psdBinary)
+      				
+      				// Compare
+      				IF bufElement = bufItem THEN
+      					
+      					// Deletes the element
+      					ArrayDelete(_jmpCategory.Elements, nSubscript)
+      					bDeleted = True
+      					BREAK
+      				END
+      			END
+      		END		
+      		
+      		// Keeps 
+      		pclJumpList.Categories[sCategory] = _jmpCategory
+      END
+      
+      RESULT bDeleted
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListDeleteCategory
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957498617230387176
+     type_code : 15
+     code : |1-
+      // Summary: Entirely deletes the content of a JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListDeleteCategory (<pclJumpList> is dynamic JumpList, <sCategory> is string)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	sCategory (string): Category to delete
+      // Return value:
+      // 	boolean: True if the category was deleted, False otherwise
+      // Notes:
+      // - The list of elements is global to all the JumpList declared in the project
+      // - All the documents and shortcuts attached to this category will also be deleted
+      // - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListDeleteCategory(pclJumpList is JumpList dynamic, LOCAL sCategory is string)
+      
+      bDeleted is boolean
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // Deletes the category
+      bDeleted = ArrayDelete(pclJumpList.Categories, sCategory) <> 0
+      
+      RESULT bDeleted
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListTaskModify
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957499390325074009
+     type_code : 15
+     code : |1-
+      // Summary: Adds a task into the JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListTaskModify (<pclJumpList> is dynamic JumpList, <nSubscript> is int, <Task> is JumpListTask)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	nSubscript (integer): Subscript of the task to modify
+      //	Task (JumpListTask): Task that must be added to the JumpList
+      // Return value:
+      // 	boolean: True if the task was modified, False otherwise
+      // Notes:
+      //  - The list of tasks is global to all the JumpList declared in the project
+      //  - The Title property is mandatory
+      //  - The Arguments property is mandatory
+      //  - To add a separator, all you have to do is create an empty JumpListTask and to assign the IsSeparator property to True.
+      //  - To update the JumpList, call JumpListRefresh
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListTaskModify(pclJumpList is JumpList dynamic, LOCAL nSubscript is int, Task is JumpListTask)
+      
+      // Checks the JumpList
+      IF pclJumpList = Null THEN 
+      	ErrorThrow(1, "No valid JumpList was specified")
+      	RESULT False
+      END
+      
+      // If the subscript is inside the bounds
+      IF 0 < nSubscript < pclJumpList.Tasks..Occurrence THEN
+      	
+      	// Modifies the task
+      	pclJumpList.Tasks[nSubscript] <= Task
+      	RESULT True	
+      END
+      
+      RESULT False
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListElementStatus
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1957500502721731017
+     type_code : 15
+     code : |1-
+      // Summary: Checks a document or a shortcut in a JumpList
+      // Syntax:
+      //[ <Result> = ] JumpListElementStatus (<pclJumpList> is JumpList dynamic, <Element> is object dynamic)
+      //
+      // Parameters:
+      //	pclJumpList (dynamic JumpList): JumpList
+      //	Element (dynamic object): Element to check (JumpListFile or JumpListShortcut)
+      // Return value:
+      // 	boolean: True if the element was manually deleted by the user, False otherwise or if an error occurred
+      //
+      // Automatic process of exceptions:   run CASE EXCEPTION:
+      //
+      PROCEDURE JumpListElementStatus(pclJumpList is JumpList dynamic, Element is object dynamic)
+      
+      // Checks the type
+      IF NOT Element..Class IN (JumpListShortcut, JumpListFile) THEN 
+      	ErrorThrow(1, Element..Class + " is not a valid type")
+      		RESULT False
+      END
+      
+      RESULT pclJumpList.DeletedElement(Element)
+      
+      CASE EXCEPTION:
+      ErrorThrow(1, ExceptionInfo)
+      RESULT False
+     type : 458752
+   -
+     name : JumpListCreateTask
+     procedure_id : 1957868740455223920
+     type_code : 15
+     code : |1-
+      // Summary: Creates a task that will be added to a Jumplist
+      // Syntax:
+      //[ <Result> = ] JumpListCreateTask (<sTitle> is string, <sApplicationPath> is string, <sArguments> is string)
+      //
+      // Parameters:
+      //	sTitle (string): Title of the task
+      //	sApplicationPath (string): Full path of the application to run
+      //	sArguments (string): Arguments of the command line
+      // Return value:
+      // 	JumpListTask: Created task
+      //
+      PROCEDURE JumpListCreateTask(LOCAL sTitle is string, LOCAL sApplicationPath is string, LOCAL sArguments is string)
+      
+      ATask is JumpListTask
+      
+      // Configures the task
+      ATask.Shortcut.Title 	 = sTitle
+      ATask.Shortcut.Path 	 = sApplicationPath
+      ATask.Shortcut.Arguments = sArguments
+      
+      RESULT ATask
+     type : 458752
+   -
+     name : JumpListCreateShortcut
+     procedure_id : 1957869285916131539
+     type_code : 15
+     code : |1-
+      // Summary: Creates a shortcut that will be added to a Jumplist
+      // Syntax:
+      //[ <Result> = ] JumpListCreateShortcut (<sTitle> is string, <sApplicationPath> is string)
+      //
+      // Parameters:
+      //	sTitle (string): Title of the shortcut
+      //	sApplicationPath (string): Full path of the application to run
+      // Return value:
+      // 	JumpListShortcut: Created shortcut
+      //
+      PROCEDURE JumpListCreateShortcut(LOCAL sTitle is string, LOCAL sApplicationPath is string)
+      
+      AShortcut is JumpListShortcut
+      
+      // Configures the shortcut
+      AShortcut.Title 	 = sTitle
+      AShortcut.Path 	 = sApplicationPath
+      
+      RESULT AShortcut
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_Collection1
+resources :
+ string_res :
+  identifier : 0x1b29f597000b2693
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
